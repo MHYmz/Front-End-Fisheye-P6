@@ -1,0 +1,10 @@
+{
+    "editor.codeActionsOnSave": true,
+    "eslint.enable": true,
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact"
+    ]
+  }  

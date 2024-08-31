@@ -1,21 +1,50 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Fisheye</title>
+
+    <!-- Lien vers une police Google Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
+    />
+
+    <!-- Lien vers la feuille de style principale -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Lien vers l'icône de la page (favicon) -->
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
   </head>
   <body>
     <header>
-        <img src="assets/images/logo.png" class="logo" alt="fisheye logo"/>
-        <h1>Nos photographes</h1>
+      <!-- Logo de la page d'accueil -->
+      <a href="index.html" title="Fisheye Home page">
+        <img src="assets/images/logo.png" class="logo" alt="fisheye logo" />
+      </a>
+
+      <!-- Titre principal de la page -->
+      <h1>Nos photographes</h1>
     </header>
+
     <main id="main">
-        <div class="photographer_section"></div>
+      <!-- Section pour afficher les photographes -->
+      <div class="photographer_section"></div>
     </main>
+
+    <!-- Inclusion des scripts JavaScript -->
+    
+    <!-- Script pour les modèles des photographes -->
+    <script src="scripts/models/Photographer.js"></script>
+
+    <!-- Script pour les templates de présentation des photographes -->
     <script src="scripts/templates/photographer.js"></script>
+
+    <!-- Script pour l'API et la récupération des données -->
+    <script src="scripts/api/Api.js"></script>
+
+    <!-- Script principal pour la page d'accueil -->
     <script src="scripts/pages/index.js"></script>
   </body>
 </html>

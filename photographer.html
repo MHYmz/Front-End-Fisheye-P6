@@ -1,37 +1,140 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
+    <!-- Définition des métadonnées et des liens vers les fichiers de style -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fisheye - photographe</title>
+    <!-- Police de caractères pour la page -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" />
+    <!-- Icônes FontAwesome pour les éléments visuels -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <!-- Feuille de style personnalisée pour le site -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Icône de la page affichée dans l'onglet du navigateur -->
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
   </head>
   <body>
+    <!-- En-tête de la page contenant le logo cliquable -->
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="index.html" title="Fisheye Home page" tabindex="1">
+        <img src="assets/images/logo.png" class="logo" alt="fisheye logo" />
+      </a>
     </header>
+    
+    <!-- Contenu principal de la page -->
     <main id="main">
+      <!-- Section en-tête du photographe avec un bouton pour contacter -->
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <!-- Informations supplémentaires sur le photographe (à remplir dynamiquement) -->
+        <div class="photograph-info"></div>
+        <!-- Bouton pour ouvrir le formulaire de contact -->
+        <button class="contact_button" tabindex="2" aria-controls="contact_modal" aria-expanded="false" onclick="displayModal()">
+          Contactez-moi
+        </button>
+      </div>
+      
+      <!-- Galerie des photos du photographe -->
+      <div class="photograph-gallery">
+        <!-- Section pour filtrer les photos -->
+        <div class="filter">
+          <span>Trier par :</span>
+          <!-- Menu déroulant pour choisir le critère de tri -->
+          <div class="dropdown" role="group" aria-haspopup="listbox" aria-expanded="false">
+            <button class="dropbtn" tabindex="10" aria-expanded="false">
+              Popularité
+              <em class="fa-solid fa-chevron-up" aria-hidden="true"></em>
+            </button>
+            <!-- Liste des options de tri -->
+            <div class="dropdown-content hide-menu" role="listbox" aria-labelledby="dropdownButton">
+              <button id="btn-popularity" role="option" tabindex="10">Popularité</button>
+              <button id="btn-date" role="option" tabindex="11">Date</button>
+              <button id="btn-title" role="option" tabindex="12">Titre</button>
+            </div>
+          </div>
+        </div>
+        <!-- Conteneur pour les éléments de la galerie -->
+        <div class="gallery"></div>
+        <!-- Barre inférieure de la galerie affichant les informations sur les likes et le prix -->
+        <div class="gallery-bottom-bar">
+          <span id="totalLikes"></span>
+          <span id="price"></span>
+        </div>
       </div>
     </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+    
+    <!-- Modal de contact qui apparaît lorsque l'utilisateur clique sur le bouton de contact -->
+    <div id="contact_modal" 
+      role="dialog"  
+      aria-labelledby="modalTitle" 
+      aria-hidden="true">
+      <div class="modal">
+        <header>
+          <h2 id="modalTitle">Contactez-moi</h2>
+          <!-- Icône pour fermer la modal de contact -->
+          <img tabindex="3" alt="Icône de fermeture de la modal de contact" 
+            src="assets/icons/close.svg" 
+            onclick="closeModal()" 
+            aria-label="Fermer" />
         </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
+        <!-- Formulaire de contact avec champs pour le prénom, nom, email et message -->
+        <form>
+          <div>
+            <label for="prenom">Prénom</label>
+            <input tabindex="4" type="text" name="prenom" id="prenom" autocomplete="given-name" />
+            <label for="nom">Nom</label>
+            <input tabindex="5" type="text" name="nom" id="nom" autocomplete="family-name" />
+            <label for="email">Email</label>
+            <input tabindex="6" type="email" name="email" id="email" autocomplete="email" />
+            <label for="message">Message</label>
+            <textarea tabindex="7" name="message" id="message" rows="5" autocomplete="off"></textarea>
+          </div>
+          <!-- Bouton pour envoyer le formulaire de contact -->
+          <button tabindex="8" class="contact_button">Envoyer</button>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Modal pour afficher les images en plein écran -->
+    <div id="lightbox_modal" 
+      role="dialog" 
+      aria-labelledby="lightboxTitle" 
+      aria-hidden="true">
+      <div class="lightbox">
+        <header>
+          <!-- Icône pour fermer la lightbox -->
+          <img alt="Icône de fermeture de la lightbox" src="assets/icons/close-red.svg" onclick="closeLightbox()" aria-label="Fermer" />
+        </header>
+        <!-- Conteneur pour le contenu de la lightbox (image ou vidéo) -->
+        <div id="lightboxContent"></div>
+      </div>
+    </div>
+
+    <!-- Chargement des scripts JavaScript nécessaires -->
+    <!-- Modules pour la création des objets et gestion des médias -->
+    <script src="scripts/factories/MediaFactory.js"></script>
+
+    <!-- Utilitaires pour la gestion des événements clavier, du formulaire de contact, et de la lightbox -->
+    <script src="scripts/utils/keyboardListeners.js"></script>
+    <script src="scripts/utils/contactForm.js"></script>
+    <script src="scripts/utils/lightbox.js"></script>
+    <script src="scripts/utils/gallery.js"></script>
+    <script src="scripts/utils/filters.js"></script>
+    <script src="scripts/utils/localStorage.js"></script>
+    
+    <!-- Modèles pour les données des photographes et médias -->
+    <script src="scripts/models/Photographer.js"></script>
+    <script src="scripts/models/Media.js"></script>
+    <script src="scripts/models/Video.js"></script>
+    <script src="scripts/models/Image.js"></script>
+
+    <!-- Templates pour le rendu des informations sur les photographes -->
+    <script src="scripts/templates/photographer.js"></script>
+
+    <!-- API pour les interactions avec les données externes -->
+    <script src="scripts/api/Api.js"></script>
+
+    <!-- Point d'entrée de l'application pour la page du photographe -->
+    <script src="scripts/pages/photographer.js"></script>
   </body>
 </html>

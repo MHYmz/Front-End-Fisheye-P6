@@ -1,76 +1,392 @@
-#contact_modal {
-    display: none;
+#contact_modal,
+#lightbox_modal {
+  display: none; /* Masque ces éléments par défaut (ils ne sont pas visibles) */
 }
 
 .photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
+  background-color: #fafafa; /* Couleur de fond grise très claire */
+  margin: 0 100px; /* Marge de 100 pixels à gauche et à droite */
+  display: flex; /* Utilise un modèle flexible pour les éléments internes */
+  justify-content: space-between; /* Espace égal entre les éléments internes */
+  align-items: center; /* Aligne les éléments au centre verticalement */
+  padding: 40px; /* Ajoute un espace de 40 pixels autour du contenu */
 }
 
 .contact_button {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color: #901C1C;
-    border-radius: 5px;
-    cursor: pointer;
+  font-size: 20px; /* Taille de la police fixée à 20 pixels */
+  font-weight: 700; /* Texte en gras (poids de la police) */
+  color: white; /* Couleur du texte en blanc */
+  padding: 11px; /* Espace interne de 11 pixels autour du texte */
+  width: 170px; /* Largeur fixe de 170 pixels */
+  height: 70px; /* Hauteur fixe de 70 pixels */
+  border: none; /* Pas de bordure */
+  background-color: #901c1c; /* Couleur de fond rouge foncé */
+  border-radius: 5px; /* Coins arrondis avec un rayon de 5 pixels */
+  cursor: pointer; /* Change le curseur en main lorsqu'on survole le bouton */
+}
+
+.contact_button:hover {
+  background-color: #db8876; /* Couleur de fond change en orange clair au survol */
+  color: black; /* Couleur du texte change en noir au survol */
+}
+
+.filter {
+  display: flex; /* Utilise un modèle flexible pour les éléments internes */
+  align-items: center; /* Aligne les éléments au centre verticalement */
+  gap: 10px; /* Espacement de 10 pixels entre les éléments */
+  padding: 2em 0; /* Ajoute un espace vertical de 2 em (unité de police) */
+}
+
+.filter label {
+  font-weight: 700; /* Texte en gras (poids de la police) */
+  font-size: 18px; /* Taille de la police fixée à 18 pixels */
+}
+
+.hide-menu {
+  display: none; /* Masque cet élément (il n'est pas visible) */
+}
+
+.display-menu {
+  display: block; /* Affiche cet élément (il est visible) */
+}
+
+.dropdown {
+  position: relative; /* Positionne l'élément par rapport à son conteneur */
+  display: inline-block; /* Affiche l'élément en ligne avec un espace en bloc */
+  min-width: 160px; /* Largeur minimale de 160 pixels */
+}
+
+.rotate {
+  transform: rotate(180deg); /* Fait pivoter l'élément de 180 degrés */
+  transition: transform 0.2s ease; /* Transition douce de la rotation en 0.2 secondes */
+}
+
+.chevron {
+  margin-left: 4px; /* Marge à gauche de 4 pixels */
+  transition: transform 0.2s ease; /* Transition douce pour la rotation en 0.2 secondes */
+}
+
+.dropbtn {
+  color: #fff; /* Couleur du texte en blanc */
+  display: flex; /* Utilise un modèle flexible pour les éléments internes */
+  align-items: center; /* Aligne les éléments au centre verticalement */
+  justify-content: space-between; /* Espace égal entre les éléments internes */
+  font-size: 18px; /* Taille de la police fixée à 18 pixels */
+  font-weight: 700; /* Texte en gras (poids de la police) */
+  border: none; /* Pas de bordure */
+  cursor: pointer; /* Change le curseur en main lorsqu'on survole le bouton */
+  text-decoration: none; /* Supprime la décoration du texte (comme le soulignement) */
+  text-align: left; /* Aligne le texte à gauche */
+  width: 160px; /* Largeur fixe de 160 pixels */
+  height: 60px; /* Hauteur fixe de 60 pixels */
+  border-radius: 5px; /* Coins arrondis avec un rayon de 5 pixels */
+  background-color: #901c1c; /* Couleur de fond rouge foncé */
+  transition-duration: 0.5s; /* Transition douce pour la couleur de fond en 0.5 secondes */
+  padding: 0 20px; /* Espace interne de 20 pixels à gauche et à droite */
+}
+
+.dropdown-content {
+  position: absolute; /* Positionne l'élément par rapport à son conteneur parent */
+  z-index: 1; /* Assure que cet élément est au-dessus des autres éléments */
+  background-color: #901c1c; /* Couleur de fond rouge foncé */
+  min-width: 160px; /* Largeur minimale de 160 pixels */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); /* Ombre portée autour de l'élément */
+  border-radius: 5px; /* Coins arrondis avec un rayon de 5 pixels */
+  margin-top: -5px; /* Décale l'élément vers le haut de 5 pixels */
+  font-size: 18px; /* Taille de la police fixée à 18 pixels */
+  font-weight: 700; /* Texte en gras (poids de la police) */
+  padding: 0; /* Pas d'espace interne supplémentaire */
+}
+
+.dropdown-content li {
+  list-style: none; /* Supprime les puces ou numéros des éléments de liste */
+}
+
+.dropdown-content li:first-child {
+  display: none; /* Masque le premier élément de la liste */
+}
+
+.dropdown-content button {
+  color: #fff; /* Couleur du texte en blanc */
+  padding: 12px 0 16px 20px; /* Espace interne autour du texte (haut, bas, gauche) */
+  text-decoration: none; /* Supprime la décoration du texte (comme le soulignement) */
+  display: block; /* Affiche l'élément en bloc */
+  position: relative; /* Positionne l'élément relativement à son positionnement */
+  cursor: pointer; /* Change le curseur en main lorsqu'on survole le bouton */
+  background: none; /* Pas de couleur de fond */
+  border: none; /* Pas de bordure */
+  width: 100%; /* Largeur de 100% du conteneur parent */
+  text-align: left; /* Aligne le texte à gauche */
+  font-size: 18px; /* Taille de la police fixée à 18 pixels */
+  font-weight: 700; /* Texte en gras (poids de la police) */
+}
+
+.dropdown-content button::before {
+  content: ""; /* Contenu vide pour l'élément avant */
+  position: absolute; /* Positionne l'élément avant relativement à son bouton parent */
+  top: 0; /* Positionné en haut de l'élément */
+  left: 10px; /* Décalé vers la droite de 10 pixels */
+  width: 88%; /* Largeur de 88% de l'élément parent */
+  height: 1px; /* Hauteur de 1 pixel pour créer une ligne */
+  background-color: #fff; /* Couleur de la ligne en blanc */
+}
+
+.dropdown-content button:hover {
+  background-color: #db8876; /* Couleur de fond change en orange clair au survol */
+  color: black; /* Couleur du texte change en noir au survol */
+  border-radius: 0 0 5px 5px; /* Coins inférieurs arrondis avec un rayon de 5 pixels */
+}
+
+.dropbtn:hover {
+  background-color: #db8876; /* Couleur de fond change en orange clair au survol */
+  color: black; /* Couleur du texte change en noir au survol */
+}
+
+.photograph-gallery {
+  margin: 0 100px 200px 100px; /* Marges de 100 pixels à gauche et à droite, 200 pixels en bas */
+}
+
+.gallery {
+  display: grid; /* Utilise une grille pour disposer les éléments */
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Colonnes automatiques avec une largeur minimale de 400 pixels */
+  gap: 30px 60px; /* Espacement de 30 pixels entre les lignes et 60 pixels entre les colonnes */
+  margin-bottom: 4em; /* Marge inférieure de 4 em (unité de police) */
+}
+
+.gallery article {
+  display: flex; /* Utilise un modèle flexible pour les éléments internes */
+  flex-direction: column; /* Disposition des éléments en colonne */
+  gap: 10px; /* Espacement de 10 pixels entre les éléments */
+}
+
+.gallery article:hover {
+  cursor: pointer; /* Change le curseur en main lorsqu'on survole l'article */
+}
+
+.gallery article img:hover,
+.gallery article video:hover {
+  transform: scale(1.05); /* Agrandit légèrement l'image ou la vidéo au survol */
+}
+
+.gallery figure {
+  margin: 0; /* Pas de marge autour de la figure */
+  position: relative; /* Positionne la figure relativement à son conteneur */
+  transition: all 0.2s ease-in-out; /* Transition douce pour toutes les propriétés en 0.2 secondes */
+  overflow: hidden; /* Masque tout dépassement du contenu */
+  border-radius: 10px; /* Coins arrondis avec un rayon de 10 pixels */
+}
+
+.gallery .media-container {
+  overflow: hidden; /* Masque tout dépassement du contenu */
+  border-radius: 5px; /* Coins arrondis avec un rayon de 5 pixels */
+  display: block; /* Affiche l'élément en bloc */
+  text-decoration: none; /* Supprime la décoration du texte (comme le soulignement) */
+}
+
+.gallery img,
+.gallery video {
+  display: block; /* Affiche l'image ou la vidéo en bloc */
+  width: 100%; /* Largeur de 100% du conteneur parent */
+  height: 350px; /* Hauteur fixe de 350 pixels */
+  object-fit: cover; /* Ajuste l'objet pour couvrir le conteneur sans distorsion */
+  object-position: center; /* Positionne l'objet au centre du conteneur */
+  transform-origin: center bottom; /* Point de départ de la transformation en bas du centre */
+  transition: transform 0.3s ease; /* Transition douce pour la transformation en 0.3 secondes */
+}
+
+.gallery figcaption {
+  display: flex; /* Utilise un modèle flexible pour les éléments internes */
+  align-items: center; /* Aligne les éléments au centre verticalement */
+  justify-content: space-between; /* Espace égal entre les éléments internes */
+  width: 100%; /* Largeur de 100% du conteneur parent */
+  color: #901c1c; /* Couleur du texte en rouge foncé */
+  margin-top: 0.6em; /* Marge supérieure de 0.6 em (unité de police) */
+}
+
+.gallery figcaption h2 {
+  font-size: 24px; /* Taille de la police fixée à 24 pixels */
+  font-weight: 400; /* Texte en poids normal (pas en gras) */
+  margin: 0; /* Pas de marge autour du titre */
+}
+
+.gallery figcaption span {
+  align-self: flex-start; /* Aligne l'élément au début de son conteneur */
+  display: flex; /* Utilise un modèle flexible pour les éléments internes */
+  align-items: center; /* Aligne les éléments au centre verticalement */
+  gap: 5px; /* Espacement de 5 pixels entre les éléments */
+  font-size: 24px; /* Taille de la police fixée à 24 pixels */
+  font-weight: 500; /* Texte en gras (poids de la police) */
+}
+
+.gallery figcaption span i {
+  color: #db8876; /* Couleur du texte en orange clair */
+}
+
+.gallery figcaption span b {
+  font-weight: 500; /* Texte en gras (poids de la police) */
+}
+
+.gallery figcaption span i.liked,
+.gallery figcaption span i:hover {
+  color: #901c1c; /* Couleur du texte en rouge foncé lorsque l'élément est aimé ou survolé */
+}
+
+.gallery-bottom-bar {
+  position: fixed; /* Fixe la barre en bas de la fenêtre */
+  bottom: 0; /* Positionne la barre au bas de la fenêtre */
+  right: 4rem; /* Décalé vers la droite de 4 rem (unité de taille de police) */
+  background: #db8876; /* Couleur de fond en orange clair */
+  color: black; /* Couleur du texte en noir */
+  padding: 10px 50px; /* Espace interne de 10 pixels en haut et en bas, 50 pixels à gauche et à droite */
+  width: 300px; /* Largeur fixe de 300 pixels */
+  font-weight: 500; /* Texte en gras (poids de la police) */
+  font-size: 24px; /* Taille de la police fixée à 24 pixels */
+}
+
+.gallery-bottom-bar span:nth-child(2) {
+  float: right; /* Décale le deuxième élément vers la droite */
+}
+
+#contact_modal {
+  align-items: center; /* Aligne les éléments au centre verticalement */
+  justify-content: center; /* Aligne les éléments au centre horizontalement */
+  position: fixed; /* Fixe l'élément en place par rapport à la fenêtre */
+  top: 0; /* Positionne l'élément en haut de la fenêtre */
+  left: 0; /* Positionne l'élément à gauche de la fenêtre */
+  width: 100%; /* Largeur de 100% de la fenêtre */
+  height: 100%; /* Hauteur de 100% de la fenêtre */
+  background: rgba(0, 0, 0, 0.5); /* Couleur de fond noir semi-transparent */
+  z-index: 2; /* Assure que cet élément est au-dessus des autres éléments */
 }
 
 .modal {
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
+  border-radius: 5px; /* Coins arrondis avec un rayon de 5 pixels */
+  background-color: #db8876; /* Couleur de fond orange clair */
+  width: 30%; /* Largeur de 30% de la fenêtre */
+  display: flex; /* Utilise un modèle flexible pour les éléments internes */
+  flex-direction: column; /* Disposition des éléments en colonne */
+  align-items: center; /* Aligne les éléments au centre horizontalement */
+  justify-content: space-between; /* Espace égal entre les éléments internes */
+  padding: 35px; /* Ajoute un espace de 35 pixels autour du contenu */
+  margin: auto; /* Centre l'élément horizontalement et verticalement */
+  position: relative; /* Positionne l'élément relativement à son conteneur */
+}
+
+.modal header,
+.lightbox header {
+  width: 100%; /* Largeur de 100% du conteneur parent */
 }
 
 .modal header {
-    justify-content: space-between;
-    width: 100%;
+  margin: 0 0 1em 0; /* Marge inférieure de 1 em (unité de police) */
+}
+
+.lightbox header {
+  flex-direction: row-reverse; /* Disposition des éléments en ligne avec l'ordre inversé */
+  margin: 0 0 -4.8em 0; /* Marge négative en haut de -4.8 em (pour remonter) */
 }
 
 .modal header img {
-    cursor: pointer;
+  cursor: pointer; /* Change le curseur en main lorsqu'on survole l'image */
+  width: 32px; /* Largeur fixe de 32 pixels */
+  margin-bottom: 2em; /* Marge inférieure de 2 em (unité de police) */
 }
 
-.modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
+.modal header h2,
+.lightbox header h2 {
+  font-size: 32px; /* Taille de la police fixée à 32 pixels */
+  font-weight: normal; /* Texte en poids normal (pas en gras) */
+  text-align: left; /* Aligne le texte à gauche */
+}
+
+.lightbox-media {
+  width: 600px; /* Largeur fixe de 600 pixels */
+  height: 514px; /* Hauteur fixe de 514 pixels */
+  border-radius: 5px; /* Coins arrondis avec un rayon de 5 pixels */
+  object-fit: contain; /* Ajuste l'objet pour contenir le conteneur sans distorsion */
+  margin-bottom: 20px; /* Marge inférieure de 20 pixels */
+}
+
+.arrow {
+  position: absolute; /* Positionne l'élément par rapport à son conteneur parent */
+  top: 50%; /* Positionne l'élément à mi-hauteur du conteneur parent */
+  transform: translateY(-50%); /* Centre verticalement l'élément en décalant de la moitié de sa hauteur */
+  font-size: 42px; /* Taille de la police fixée à 42 pixels */
+  color: #901c1c; /* Couleur du texte en rouge foncé */
+  cursor: pointer; /* Change le curseur en main lorsqu'on survole l'élément */
+}
+
+.fa-chevron-left {
+  left: 1em; /* Décalé vers la gauche de 1 em (unité de taille de police) */
+}
+
+.fa-chevron-right {
+  right: 1em; /* Décalé vers la droite de 1 em (unité de taille de police) */
 }
 
 form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
+  display: flex; /* Utilise un modèle flexible pour les éléments internes */
+  width: 100%; /* Largeur de 100% du conteneur parent */
+  flex-direction: column; /* Disposition des éléments en colonne */
+  align-items: flex-start; /* Aligne les éléments au début du conteneur */
 }
 
 form label {
-    color: #312E2E;
-    font-size: 36px;
+  color: #312e2e; /* Couleur du texte en gris foncé */
+  font-size: 24px; /* Taille de la police fixée à 24 pixels */
 }
 
 form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
+  display: flex; /* Utilise un modèle flexible pour les éléments internes */
+  flex-direction: column; /* Disposition des éléments en colonne */
+  width: 100%; /* Largeur de 100% du conteneur parent */
+  align-items: self-start; /* Aligne les éléments au début du conteneur */
+  margin-bottom: 26px; /* Marge inférieure de 26 pixels */
+}
+
+form input,
+form textarea {
+  width: 100%; /* Largeur de 100% du conteneur parent */
+  border: none; /* Pas de bordure */
+  border-radius: 5px; /* Coins arrondis avec un rayon de 5 pixels */
+  font-size: 36px; /* Taille de la police fixée à 36 pixels */
 }
 
 form input {
-    width: 100%;
-    height: 68px;
-    border: none;
-    border-radius: 5px;
+  height: 50px; /* Hauteur fixe de 50 pixels pour les champs de texte */
+}
+
+form textarea {
+  height: 89px; /* Hauteur fixe de 89 pixels pour les zones de texte */
+}
+
+#lightbox_modal {
+  align-items: center; /* Aligne les éléments au centre verticalement */
+  justify-content: center; /* Aligne les éléments au centre horizontalement */
+  position: fixed; /* Fixe l'élément en place par rapport à la fenêtre */
+  top: 0; /* Positionne l'élément en haut de la fenêtre */
+  left: 0; /* Positionne l'élément à gauche de la fenêtre */
+  width: 100%; /* Largeur de 100% de la fenêtre */
+  height: 100%; /* Hauteur de 100% de la fenêtre */
+  background: rgba(0, 0, 0, 0.5); /* Couleur de fond noir semi-transparent */
+  z-index: 2; /* Assure que cet élément est au-dessus des autres éléments */
+}
+
+.lightbox {
+  background-color: #fff; /* Couleur de fond blanche */
+  width: 40%; /* Largeur de 40% de la fenêtre */
+  display: flex; /* Utilise un modèle flexible pour les éléments internes */
+  flex-direction: column; /* Disposition des éléments en colonne */
+  align-items: center; /* Aligne les éléments au centre horizontalement */
+  justify-content: space-between; /* Espace égal entre les éléments internes */
+  padding: 35px; /* Ajoute un espace de 35 pixels autour du contenu */
+  margin: auto; /* Centre l'élément horizontalement et verticalement */
+  position: relative; /* Positionne l'élément relativement à son conteneur */
+}
+
+#lightboxContent h2 {
+  font-weight: 400; /* Texte en poids normal (pas en gras) */
+  font-size: 24px; /* Taille de la police fixée à 24 pixels */
+  color: #901c1c; /* Couleur du texte en rouge foncé */
+  margin: 0; /* Pas de marge autour du titre */
 }
