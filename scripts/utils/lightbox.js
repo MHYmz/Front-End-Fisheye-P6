@@ -62,7 +62,8 @@ function displayLightbox(currentMedia, allMedia) {
 
   // Active la fermeture de la lightbox lorsque la touche Escape est pressée
   // eslint-disable-next-line no-undef
-  addEscapeListener(lightbox);
+  addEscapeListener(closeLightbox);
+  addArrowKeyListener(showPreviousMedia,showNextMedia);
 
   // Affiche la lightbox
   lightbox.style.display = "flex";
@@ -115,14 +116,12 @@ function createArrowElement(className, clickHandler) {
 }
 
 // Ferme la lightbox en la masquant
-// eslint-disable-next-line no-unused-vars
 function closeLightbox() {
   const lightbox = document.getElementById("lightbox_modal");
   lightbox.style.display = "none"; // Cache la lightbox
 }
 
 // Ajoute des écouteurs d'événements pour les touches fléchées gauche et droite
-// eslint-disable-next-line no-unused-vars
 function addArrowKeyListener(previousHandler, nextHandler) {
   document.addEventListener("keydown", function(event) {
     if (event.key === "ArrowLeft") {

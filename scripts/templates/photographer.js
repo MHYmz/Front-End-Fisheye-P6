@@ -302,29 +302,42 @@ function photographerTemplate(data) {
               displayLightbox(media, photographerMedia);
             }
           });
-          
-          // Gestion du clic sur l'icône de like pour mettre à jour les likes.
-          likesContainer.addEventListener("click", function () {
-            const currentLikes = parseInt(likesNumber.textContent, 10);
-            const isLiked = mediaData.likes !== mediaData.userLikes;
     
-            if (isLiked) {
-              mediaData.userLikes = currentLikes - 1;
-              likesNumber.textContent = currentLikes - 1;
-              heartIcon.classList.remove("liked");
-              likesAndDislikes[media.id] = 'disliked'; 
-            } else {
-              mediaData.userLikes = currentLikes + 1;
-              likesNumber.textContent = currentLikes + 1;
-              heartIcon.classList.add("liked");
-              likesAndDislikes[media.id] = 'liked';
-            }
-            // eslint-disable-next-line no-undef
-            updateLikesAndDislikes(likesAndDislikes);
-            totalLikes = isLiked ? totalLikes - 1 : totalLikes + 1;
-            // eslint-disable-next-line no-undef
-            updateTotalLikes(totalLikes);
-          });
+
+  // Configure le conteneur des likes.
+  likesContainer.setAttribute("tabindex", tabindexCount); // Assurez-vous que le conteneur peut recevoir le focus.
+  tabindexCount++;
+
+  // Ajoutez un gestionnaire d'événements pour les clics sur le conteneur de likes.
+  likesContainer.addEventListener("click", function () {
+  const currentLikes = parseInt(likesNumber.textContent, 10);
+  const isLiked = mediaData.likes !== mediaData.userLikes;
+
+  if (isLiked) {
+    mediaData.userLikes = currentLikes - 1;
+    likesNumber.textContent = currentLikes - 1;
+    heartIcon.classList.remove("liked");
+    likesAndDislikes[media.id] = 'disliked'; 
+  } else {
+    mediaData.userLikes = currentLikes + 1;
+    likesNumber.textContent = currentLikes + 1;
+    heartIcon.classList.add("liked");
+    likesAndDislikes[media.id] = 'liked';
+  }
+  // eslint-disable-next-line no-undef
+  updateLikesAndDislikes(likesAndDislikes);
+    totalLikes = isLiked ? totalLikes - 1 : totalLikes + 1;
+  // eslint-disable-next-line no-undef
+  updateTotalLikes(totalLikes);
+  });
+
+  // Ajoutez un gestionnaire d'événements pour les interactions clavier.
+  likesContainer.addEventListener("keydown", function (event) {
+    if (event.code === "Enter") { // Vérifiez si la touche "Entrée" est pressée.
+    event.preventDefault(); // Empêchez l'action par défaut (si nécessaire).
+    likesContainer.click(); // Simulez un clic sur le conteneur de likes.
+  }
+  });
     
           // Ajoute les éléments au DOM.
           figcaption.appendChild(titleElement);
